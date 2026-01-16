@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W1AW - Ham Radio Station</title>
+    <title>W1AW - Station Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -14,56 +14,109 @@
             <i class="fa-solid fa-tower-broadcast"></i> W1AW
         </div>
         <div class="nav-links">
-            <a href="#about">The Shack</a>
+            <a href="#dashboard">Conditions</a>
+            <a href="#shack">The Shack</a>
             <a href="#logbook">Logbook</a>
-            <a href="#contact">QSL Info</a>
         </div>
         <div class="utc-clock" id="utc-clock">UTC: 00:00:00</div>
     </nav>
 
     <header class="hero">
-        <div class="hero-content">
+        <div class="hero-overlay">
             <h1>CQ CQ CQ de W1AW</h1>
-            <p>Transmitting from <span class="highlight">Newington, CT</span> | Grid: <span class="highlight">FN31pr</span></p>
-            <a href="#contact" class="btn">Send QSL Card</a>
+            
+            <div class="station-meta">
+                <p>
+                    <i class="fa-solid fa-location-dot"></i> 
+                    Grid: <a href="https://k7fry.com/grid/?qth=FN31pr" target="_blank" class="grid-link">FN31pr</a>
+                </p>
+                
+                <div id="status-indicator" class="status-off" onclick="toggleStatus()">
+                    <span class="status-dot"></span> 
+                    <span id="status-text">OFF AIR</span>
+                </div>
+            </div>
+
+            <a href="mailto:email@example.com" class="btn">Send QSL Card</a>
         </div>
     </header>
 
-    <section id="about" class="container">
+    <section id="dashboard" class="container">
+        <div class="dashboard-grid">
+            
+            <div class="card solar-card">
+                <h3><i class="fa-solid fa-sun"></i> Solar-Terrestrial Data</h3>
+                <div class="solar-img-wrapper">
+                    <a href="https://www.hamqsl.com/solar.html" target="_blank">
+                        <img src="https://www.hamqsl.com/solar101vhf.php" alt="Solar Data" id="solar-banner">
+                    </a>
+                </div>
+                <p class="small-text">Data courtesy of N0NBH</p>
+            </div>
+
+            <div class="card contest-card">
+                <h3><i class="fa-solid fa-trophy"></i> Next Operation</h3>
+                <div class="contest-details">
+                    <h4>CQ WW WPX SSB</h4>
+                    <p><strong>Bands:</strong> 80m - 10m</p>
+                    <p><strong>Goal:</strong> Search & Pounce</p>
+                </div>
+                <div class="countdown-wrapper">
+                    <div id="contest-timer">00d 00h 00m</div>
+                    <span>Until Start</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="shack" class="container">
         <h2><i class="fa-solid fa-microchip"></i> The Shack</h2>
         <div class="grid-3">
             <div class="card">
-                <h3>Transceivers</h3>
-                <p>Yaesu FT-991A</p>
-                <p>Icom IC-7300</p>
+                <h3><i class="fa-solid fa-walkie-talkie"></i> Rigs</h3>
+                <ul>
+                    <li>Yaesu FT-991A</li>
+                    <li>Icom IC-7300</li>
+                    <li>AnyTone 878UVII (DMR)</li>
+                </ul>
             </div>
             <div class="card">
-                <h3>Antennas</h3>
-                <p>End-fed Half Wave (40-10m)</p>
-                <p>Diamond X50 (VHF/UHF)</p>
+                <h3><i class="fa-solid fa-satellite-dish"></i> Antennas</h3>
+                <ul>
+                    <li>ZS6BKW (Multiband)</li>
+                    <li>Diamond X50 (V/UHF)</li>
+                    <li>Wolf River Coil (Portable)</li>
+                </ul>
             </div>
             <div class="card">
-                <h3>Modes</h3>
-                <p>SSB, CW, FT8</p>
-                <p>DMR (Brandmeister)</p>
+                <h3><i class="fa-solid fa-laptop-code"></i> Digital</h3>
+                <ul>
+                    <li>WSJT-X (FT8/FT4)</li>
+                    <li>N1MM Logger+</li>
+                    <li>Pi-Star Hotspot</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <section id="logbook" class="container">
-        <h2><i class="fa-solid fa-list"></i> Recent QSOs</h2>
-        <input type="text" id="log-search" placeholder="Search Call Sign..." onkeyup="filterLog()">
+        <h2><i class="fa-solid fa-list-ul"></i> Recent Contacts</h2>
+        <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="log-search" placeholder="Search Call Sign..." onkeyup="filterLog()">
+        </div>
         
         <div class="table-wrapper">
             <table class="log-table" id="log-table">
                 <thead>
                     <tr>
-                        <th>Date (UTC)</th>
-                        <th>Time</th>
+                        <th>Date</th>
+                        <th>Time (UTC)</th>
                         <th>Call Sign</th>
-                        <th>Freq (MHz)</th>
+                        <th>Freq</th>
                         <th>Mode</th>
-                        <th>RST (S/R)</th>
+                        <th>RST</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,9 +125,8 @@
         </div>
     </section>
 
-    <footer id="contact">
-        <p>73 de W1AW | <a href="mailto:email@example.com">email@example.com</a></p>
-        <p>QSL via: LoTW, eQSL, Direct</p>
+    <footer>
+        <p>73 de W1AW | <a href="#">QRZ Page</a> | <a href="#">LoTW</a></p>
     </footer>
 
     <script src="script.js"></script>
