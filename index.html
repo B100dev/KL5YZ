@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W1AW - Ham Radio Station</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-tower-broadcast"></i> W1AW
+        </div>
+        <div class="nav-links">
+            <a href="#about">The Shack</a>
+            <a href="#logbook">Logbook</a>
+            <a href="#contact">QSL Info</a>
+        </div>
+        <div class="utc-clock" id="utc-clock">UTC: 00:00:00</div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>CQ CQ CQ de W1AW</h1>
+            <p>Transmitting from <span class="highlight">Newington, CT</span> | Grid: <span class="highlight">FN31pr</span></p>
+            <a href="#contact" class="btn">Send QSL Card</a>
+        </div>
+    </header>
+
+    <section id="about" class="container">
+        <h2><i class="fa-solid fa-microchip"></i> The Shack</h2>
+        <div class="grid-3">
+            <div class="card">
+                <h3>Transceivers</h3>
+                <p>Yaesu FT-991A</p>
+                <p>Icom IC-7300</p>
+            </div>
+            <div class="card">
+                <h3>Antennas</h3>
+                <p>End-fed Half Wave (40-10m)</p>
+                <p>Diamond X50 (VHF/UHF)</p>
+            </div>
+            <div class="card">
+                <h3>Modes</h3>
+                <p>SSB, CW, FT8</p>
+                <p>DMR (Brandmeister)</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="logbook" class="container">
+        <h2><i class="fa-solid fa-list"></i> Recent QSOs</h2>
+        <input type="text" id="log-search" placeholder="Search Call Sign..." onkeyup="filterLog()">
+        
+        <div class="table-wrapper">
+            <table class="log-table" id="log-table">
+                <thead>
+                    <tr>
+                        <th>Date (UTC)</th>
+                        <th>Time</th>
+                        <th>Call Sign</th>
+                        <th>Freq (MHz)</th>
+                        <th>Mode</th>
+                        <th>RST (S/R)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <p>73 de W1AW | <a href="mailto:email@example.com">email@example.com</a></p>
+        <p>QSL via: LoTW, eQSL, Direct</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
