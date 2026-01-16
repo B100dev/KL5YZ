@@ -3,132 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W1AW - Station Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>K1ABC | Ham Radio Station</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e67e22;
+            --light: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            color: #333;
+            background-color: var(--light);
+        }
+
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 5px solid var(--secondary);
+        }
+
+        .callsign {
+            font-size: 3.5rem;
+            letter-spacing: 5px;
+            margin: 0;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        nav {
+            background: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        section { padding: 40px 0; border-bottom: 1px solid #ddd; }
+
+        h2 { color: var(--primary); border-left: 5px solid var(--accent); padding-left: 10px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--primary);
+            color: white;
+            margin-top: 40px;
+        }
+
+        .status-online { color: #27ae60; font-weight: bold; }
+    </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo">
-            <i class="fa-solid fa-tower-broadcast"></i> W1AW
-        </div>
-        <div class="nav-links">
-            <a href="#dashboard">Conditions</a>
-            <a href="#shack">The Shack</a>
-            <a href="#logbook">Logbook</a>
-        </div>
-        <div class="utc-clock" id="utc-clock">UTC: 00:00:00</div>
-    </nav>
+<header>
+    <p style="margin-bottom: 0;">Amateur Radio Station</p>
+    <h1 class="callsign">K1ABC</h1>
+    <p>Grid Square: FN31ab | CQ Zone: 05 | ITU Zone: 08</p>
+</header>
 
-    <header class="hero">
-        <div class="hero-overlay">
-            <h1>CQ CQ CQ de W1AW</h1>
-            
-            <div class="station-meta">
-                <p>
-                    <i class="fa-solid fa-location-dot"></i> 
-                    Grid: <a href="https://k7fry.com/grid/?qth=FN31pr" target="_blank" class="grid-link">FN31pr</a>
-                </p>
-                
-                <div id="status-indicator" class="status-off" onclick="toggleStatus()">
-                    <span class="status-dot"></span> 
-                    <span id="status-text">OFF AIR</span>
-                </div>
-            </div>
+<nav>
+    <a href="#about">About</a>
+    <a href="#shack">The Shack</a>
+    <a href="#log">Recent QSOs</a>
+    <a href="#qsl">QSL Info</a>
+</nav>
 
-            <a href="mailto:email@example.com" class="btn">Send QSL Card</a>
-        </div>
-    </header>
-
-    <section id="dashboard" class="container">
-        <div class="dashboard-grid">
-            
-            <div class="card solar-card">
-                <h3><i class="fa-solid fa-sun"></i> Solar-Terrestrial Data</h3>
-                <div class="solar-img-wrapper">
-                    <a href="https://www.hamqsl.com/solar.html" target="_blank">
-                        <img src="https://www.hamqsl.com/solar101vhf.php" alt="Solar Data" id="solar-banner">
-                    </a>
-                </div>
-                <p class="small-text">Data courtesy of N0NBH</p>
-            </div>
-
-            <div class="card contest-card">
-                <h3><i class="fa-solid fa-trophy"></i> Next Operation</h3>
-                <div class="contest-details">
-                    <h4>CQ WW WPX SSB</h4>
-                    <p><strong>Bands:</strong> 80m - 10m</p>
-                    <p><strong>Goal:</strong> Search & Pounce</p>
-                </div>
-                <div class="countdown-wrapper">
-                    <div id="contest-timer">00d 00h 00m</div>
-                    <span>Until Start</span>
-                </div>
-            </div>
-
-        </div>
+<div class="container">
+    
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hello! I'm <strong>[Your Name]</strong>, a General Class operator located in [Your City, State]. I've been licensed since [Year] and enjoy chasing DX, building antennas, and experimenting with digital modes.</p>
+        <p>Currently active on: <strong>20m, 40m, and 2m/70cm.</strong></p>
     </section>
 
-    <section id="shack" class="container">
-        <h2><i class="fa-solid fa-microchip"></i> The Shack</h2>
-        <div class="grid-3">
+    <section id="shack">
+        <h2>The Shack (Equipment)</h2>
+        <div class="grid">
             <div class="card">
-                <h3><i class="fa-solid fa-walkie-talkie"></i> Rigs</h3>
+                <h3>Transceivers</h3>
                 <ul>
-                    <li>Yaesu FT-991A</li>
-                    <li>Icom IC-7300</li>
-                    <li>AnyTone 878UVII (DMR)</li>
+                    <li>Icom IC-7300 (HF/50MHz)</li>
+                    <li>Yaesu FT-65R (Handheld)</li>
                 </ul>
             </div>
             <div class="card">
-                <h3><i class="fa-solid fa-satellite-dish"></i> Antennas</h3>
+                <h3>Antennas</h3>
                 <ul>
-                    <li>ZS6BKW (Multiband)</li>
-                    <li>Diamond X50 (V/UHF)</li>
-                    <li>Wolf River Coil (Portable)</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3><i class="fa-solid fa-laptop-code"></i> Digital</h3>
-                <ul>
-                    <li>WSJT-X (FT8/FT4)</li>
-                    <li>N1MM Logger+</li>
-                    <li>Pi-Star Hotspot</li>
+                    <li>40m Center-Fed Dipole</li>
+                    <li>Diamond X300 Vertical</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <section id="logbook" class="container">
-        <h2><i class="fa-solid fa-list-ul"></i> Recent Contacts</h2>
-        <div class="search-bar">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="log-search" placeholder="Search Call Sign..." onkeyup="filterLog()">
-        </div>
-        
-        <div class="table-wrapper">
-            <table class="log-table" id="log-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Time (UTC)</th>
-                        <th>Call Sign</th>
-                        <th>Freq</th>
-                        <th>Mode</th>
-                        <th>RST</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    </tbody>
-            </table>
-        </div>
+    <section id="log">
+        <h2>Recent Contacts</h2>
+        <table style="width:100%; text-align:left; border-collapse: collapse;">
+            <tr style="background: var(--secondary); color: white;">
+                <th style="padding:10px;">Date</th>
+                <th>Call Sign</th>
+                <th>Mode</th>
+                <th>Band</th>
+            </tr>
+            <tr>
+                <td style="padding:10px;">2024-05-10</td>
+                <td>G4XYZ</td>
+                <td>FT8</td>
+                <td>20m</td>
+            </tr>
+            <tr>
+                <td style="padding:10px;">2024-05-12</td>
+                <td>JA1HJK</td>
+                <td>SSB</td>
+                <td>15m</td>
+            </tr>
+        </table>
     </section>
 
-    <footer>
-        <p>73 de W1AW | <a href="#">QRZ Page</a> | <a href="#">LoTW</a></p>
-    </footer>
+    <section id="qsl">
+        <h2>QSL Information</h2>
+        <p>I enjoy exchanging QSL cards! You can find me on:</p>
+        <ul>
+            <li><strong>LoTW:</strong> Preferred (Updated Weekly)</li>
+            <li><strong>eQSL:</strong> Yes</li>
+            <li><strong>Direct:</strong> Please include SASE for domestic or $2 for international.</li>
+            <li><strong>Bureau:</strong> ARRL 1st District Bureau</li>
+        </ul>
+    </section>
 
-    <script src="script.js"></script>
+</div>
+
+<footer>
+    <p>&copy; 2024 K1ABC - 73!</p>
+</footer>
+
 </body>
 </html>
